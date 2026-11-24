@@ -37,3 +37,10 @@ def random_number(min_val: int = 1, max_val: int=100) -> int:
   return random.randint(min_val,max_val)
 
 
+# Resource: Server information
+@mcp.resource("info/server")
+def server_info() -> str:
+   """Get information about this server""",
+   info = {
+     
+   }
