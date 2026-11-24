@@ -28,4 +28,12 @@ def random_number(min_val: int = 1, max_val: int=100) -> int:
   Args:
 
      min_val: Minimum value (default: 1)
+     max_val: Maximum value (default: 100)
+
+  Returns:
+     A random integer between min_val and max_val
   """
+
+  return random.randint(min_val,max_val)
+
+
