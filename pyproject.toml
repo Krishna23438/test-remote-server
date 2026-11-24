@@ -7,7 +7,9 @@ authors = [
     { name = "Delta Student", email = "krishnagupta2402@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "fastmcp>=4.2.5",
+]
 
 [project.scripts]
 test-remote-server = "test_remote_server:main"
