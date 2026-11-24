@@ -42,5 +42,12 @@ def random_number(min_val: int = 1, max_val: int=100) -> int:
 def server_info() -> str:
    """Get information about this server""",
    info = {
+     "name":"Simple Calculator Server",
+     "version":"1.0.0",
+     "description":"A basic MCP server with math tools",
+     "tools":["add","random_number"],
+     "author":"Your Name",
      
    }
+
+   return json.dumps(info, indent=2)
