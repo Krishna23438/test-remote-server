@@ -15,3 +15,6 @@ Git remote add origin
 Git push -u origin main
 Create an account on FastMCP cloud 
 Deploy on FastMCP 
+
+
+https://krishnagupta.fastmcp.app/mcp

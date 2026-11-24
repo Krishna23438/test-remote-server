@@ -104,8 +104,8 @@ def list_expenses(start_date,end_date):
     return [dict(zip(cols,r)) for r in cur.fetchall()]
 
 
-  @mcp.tool
-  def summarize(start_date,end_date, category=None):
+@mcp.tool
+def summarize(start_date,end_date, category=None):
     """Summarize expenses by category within an inclusive date range."""
     with sqlite3.connect(DB_PATH) as c:
       query = (
