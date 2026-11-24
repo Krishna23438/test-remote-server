@@ -5,7 +5,7 @@ Uv init
 Uv add fastmcp 
 Create a simple server
 Run the server uv run main.py
-Test the server using mcp inspctor 
+Test the server using mcp inspector 
 Create a Github repo 
 Git init
 git add
