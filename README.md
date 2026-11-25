@@ -21,66 +21,40 @@ Deploy on FastMCP
 
 https://krishnagupta.fastmcp.app/mcp
 
-💰 Expense Tracker MCP Server
 
-An Expense Tracker MCP Server built using FastMCP that enables AI assistants to interact with expense data through the Model Context Protocol (MCP).
 
-The server provides tools to add expenses, retrieve expense records within a specified date range, and generate category-wise expense summaries. It uses an SQLite database for persistent data storage and asynchronous database operations with aiosqlite.
+# 💰 Expense Tracker MCP Server
 
-🚀 Features
+An **Expense Tracker MCP Server** built using [FastMCP](https://github.com/jlowin/fastmcp) that enables AI assistants to interact with expense data through the **Model Context Protocol (MCP)**.
 
-Add Expenses: Store expense records with date, amount, category, subcategory, and notes.
+The server provides tools to add expenses, retrieve expense records within a specified date range, and generate category-wise expense summaries. It uses an SQLite database for persistent data storage and asynchronous database operations with `aiosqlite`.
 
-List Expenses: Retrieve expenses within an inclusive date range.
+## 🚀 Features
 
-Expense Summarization: Calculate total spending and transaction counts grouped by category.
+- **Add Expenses:** Store expense records with date, amount, category, subcategory, and notes.
+- **List Expenses:** Retrieve expenses within an inclusive date range.
+- **Expense Summarization:** Calculate total spending and transaction counts grouped by category.
+- **Category Resource:** Expose predefined expense categories through an MCP resource in JSON format.
+- **SQLite Database:** Store expense records in a lightweight SQLite database.
+- **Asynchronous Operations:** Use `aiosqlite` for asynchronous database queries.
+- **HTTP Transport:** Run the MCP server using HTTP transport, making it suitable for local or remote MCP client connections.
+- **Error Handling:** Handle database errors and return meaningful error messages.
 
-Category Resource: Expose predefined expense categories through an MCP resource in JSON format.
+## 🛠️ Tech Stack
 
-SQLite Database: Store expense records in a lightweight SQLite database.
+| Technology | Purpose |
+|---|---|
+| Python | Core programming language |
+| FastMCP | MCP server development |
+| Model Context Protocol (MCP) | Communication between AI clients and tools |
+| SQLite | Expense data storage |
+| aiosqlite | Asynchronous database operations |
+| JSON | Category resource format |
+| HTTP | Server communication transport |
 
-Asynchronous Operations: Use aiosqlite for asynchronous database queries.
+## 📂 Project Structure
 
-HTTP Transport: Run the MCP server using HTTP transport, making it suitable for local or remote MCP client connections.
-
-Error Handling: Handle database errors and return meaningful error messages.
-
-🛠️ Tech Stack
-
-Technology
-
-Purpose
-
-Python
-
-Core programming language
-
-FastMCP
-
-MCP server development
-
-Model Context Protocol (MCP)
-
-Communication between AI clients and tools
-
-SQLite
-
-Expense data storage
-
-aiosqlite
-
-Asynchronous database operations
-
-JSON
-
-Category resource format
-
-HTTP
-
-Server communication transport
-
-📂 Project Structure
-
+```text
 expense-tracker-mcp-server/
 │
 ├── main.py              # FastMCP server and MCP tools
@@ -89,72 +63,70 @@ expense-tracker-mcp-server/
 ├── pyproject.toml       # Project dependencies and configuration
 ├── uv.lock              # Dependency lock file (if generated)
 └── README.md            # Project documentation
+```
 
-⚙️ Installation and Setup
+## ⚙️ Installation and Setup
 
-1. Clone the Repository
+### 1. Clone the Repository
 
+```bash
 git clone YOUR_GITHUB_REPOSITORY_URL
 cd expense-tracker-mcp-server
+```
 
-2. Create a Virtual Environment
+### 2. Create a Virtual Environment
 
+```bash
 uv venv
+```
 
 Activate it on Windows PowerShell:
 
+```powershell
 .venv\Scripts\Activate.ps1
+```
 
-3. Install Dependencies
+### 3. Install Dependencies
 
+```bash
 uv add fastmcp aiosqlite
+```
 
-4. Run the MCP Server
+### 4. Run the MCP Server
 
+```bash
 uv run python main.py
+```
 
-The server starts using HTTP transport on port 8000.
+The server starts using HTTP transport on port `8000`.
 
-MCP endpoint:
+**MCP endpoint:**
 
+```text
 http://localhost:8000/mcp
+```
 
-🔧 Available MCP Tools
+## 🔧 Available MCP Tools
 
 The server currently exposes three MCP tools.
 
-1. add_expense
+### 1. `add_expense`
 
 Adds a new expense record to the SQLite database.
 
-Parameters:
+**Parameters:**
 
-Parameter
+| Parameter | Description |
+|---|---|
+| `date` | Date of the expense |
+| `amount` | Expense amount |
+| `category` | Expense category |
+| `subcategory` | Optional subcategory |
+| `note` | Optional expense description |
 
-Description
+**Example input:**
 
-date
-
-Date of the expense
-
-amount
-
-Expense amount
-
-category
-
-Expense category
-
-subcategory
-
-Optional subcategory
-
-note
-
-Optional expense description
-
-Example input:
-
+```json
 {
   "date": "2026-11-25",
   "amount": 500,
@@ -162,210 +134,153 @@ Example input:
   "subcategory": "Restaurant",
   "note": "Dinner"
 }
+```
 
-2. list_expenses
+### 2. `list_expenses`
 
 Retrieves expense records between two dates, including both the start and end dates.
 
-Parameters:
+**Parameters:**
 
-Parameter
+| Parameter | Description |
+|---|---|
+| `start_date` | Starting date |
+| `end_date` | Ending date |
 
-Description
+**Example input:**
 
-start_date
-
-Starting date
-
-end_date
-
-Ending date
-
-Example input:
-
+```json
 {
   "start_date": "2026-11-01",
   "end_date": "2026-11-30"
 }
+```
 
-3. summarize
+### 3. `summarize`
 
 Generates a category-wise expense summary for a specified date range.
 
-Parameters:
+**Parameters:**
 
-Parameter
+| Parameter | Description |
+|---|---|
+| `start_date` | Starting date |
+| `end_date` | Ending date |
+| `category` | Optional category filter |
 
-Description
+**Example input:**
 
-start_date
-
-Starting date
-
-end_date
-
-Ending date
-
-category
-
-Optional category filter
-
-Example input:
-
+```json
 {
   "start_date": "2026-11-01",
   "end_date": "2026-11-30",
   "category": "Food & Dining"
 }
+```
 
 The tool returns the total amount spent and the number of transactions for each matching category.
 
-📚 Available MCP Resource
+## 📚 Available MCP Resource
 
-expense:///categories
+### `expense:///categories`
 
 Provides expense categories in JSON format.
 
 Default categories include:
 
-Food & Dining
+- Food & Dining
+- Transportation
+- Shopping
+- Entertainment
+- Bills & Utilities
+- Healthcare
+- Travel
+- Education
+- Business
+- Other
 
-Transportation
+If `categories.json` exists, the server reads its contents. Otherwise, it returns the predefined default categories.
 
-Shopping
+## 🌐 Transport Configuration
 
-Entertainment
+This project uses **HTTP transport** through FastMCP.
 
-Bills & Utilities
-
-Healthcare
-
-Travel
-
-Education
-
-Business
-
-Other
-
-If categories.json exists, the server reads its contents. Otherwise, it returns the predefined default categories.
-
-🌐 Transport Configuration
-
-This project uses HTTP transport through FastMCP.
-
+```python
 mcp.run(
     transport="http",
     host="0.0.0.0",
     port=8000
 )
+```
 
-Transport: HTTP (Streamable HTTP)
+- **Transport:** HTTP (Streamable HTTP)
+- **Host:** `0.0.0.0`
+- **Port:** `8000`
+- **Endpoint:** `/mcp`
 
-Host: 0.0.0.0
+Binding to `0.0.0.0` allows the server to listen on available network interfaces. Public internet access requires additional deployment and network configuration.
 
-Port: 8000
-
-Endpoint: /mcp
-
-Binding to 0.0.0.0 allows the server to listen on available network interfaces. Public internet access requires additional deployment and network configuration.
-
-🧪 Testing with MCP Inspector
+## 🧪 Testing with MCP Inspector
 
 You can test the MCP server using the FastMCP development Inspector.
 
+```bash
 uv run fastmcp dev inspector main.py
+```
 
 For an HTTP connection test, start the server separately:
 
+```bash
 uv run python main.py
+```
 
 Then connect the Inspector to:
 
+```text
 http://localhost:8000/mcp
+```
 
 Select the HTTP transport/connection option when configuring the Inspector.
 
-🗄️ Database Schema
+## 🗄️ Database Schema
 
-The project uses an SQLite table named expenses.
+The project uses an SQLite table named `expenses`.
 
-Column
-
-Data Type
-
-Description
-
-id
-
-INTEGER
-
-Primary key
-
-date
-
-TEXT
-
-Expense date
-
-amount
-
-REAL
-
-Expense amount
-
-category
-
-TEXT
-
-Expense category
-
-subcategory
-
-TEXT
-
-Optional subcategory
-
-note
-
-TEXT
-
-Optional expense note
+| Column | Data Type | Description |
+|---|---|---|
+| id | INTEGER | Primary key |
+| date | TEXT | Expense date |
+| amount | REAL | Expense amount |
+| category | TEXT | Expense category |
+| subcategory | TEXT | Optional subcategory |
+| note | TEXT | Optional expense note |
 
 The database is initialized automatically when the server module loads.
 
-🔮 Future Improvements
+## 🔮 Future Improvements
 
-AI-powered spending analysis and personalized financial insights.
+- AI-powered spending analysis and personalized financial insights.
+- Monthly and yearly expense reports.
+- Budget creation and tracking.
+- Spending alerts and budget notifications.
+- Integration with visualization dashboards.
+- Export expense reports to CSV and PDF.
+- Authentication and user-specific expense records.
 
-Monthly and yearly expense reports.
-
-Budget creation and tracking.
-
-Spending alerts and budget notifications.
-
-Integration with visualization dashboards.
-
-Export expense reports to CSV and PDF.
-
-Authentication and user-specific expense records.
-
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions, suggestions, and improvements are welcome!
 
-Fork the repository.
+1. Fork the repository.
+2. Create a new feature branch.
+3. Commit your changes.
+4. Push your branch.
+5. Open a Pull Request.
 
-Create a new feature branch.
-
-Commit your changes.
-
-Push your branch.
-
-Open a Pull Request.
-
-📄 License
+## 📄 License
 
 This project is open-source. Add a license file (such as MIT) if you want to distribute it under that license.
 
-Developed using Python, FastMCP, SQLite, and the Model Context Protocol (MCP).
+---
+
+**Developed using Python, FastMCP, SQLite, and the Model Context Protocol (MCP).**
